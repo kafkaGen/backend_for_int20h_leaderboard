@@ -1,0 +1,16 @@
+2024-02-05 22:31:48,341 [INFO]: LOGING INSERTING: OlehTeam, olehborysevych, f3bfc739dd6caea3f2be5b675d366dbd into the database.
+2024-02-05 22:31:55,640 [ERROR]: Invalid Kaggle credentials: olehborysevych, f3bfc739dd6caea3f2be5b675d366dbd1231
+2024-02-05 22:32:06,044 [INFO]: LEADERBOARD INSERTING: OlehTeam with <bound method Series.to_string of fileName             submission.csv
+date            2023-05-29 17:41:30
+description                     NaN
+status                     complete
+publicScore                 0.03703
+privateScore                0.06594
+Name: 3, dtype: object> into the database.
+2024-02-05 22:32:12,199 [INFO]: LEADERBOARD SKIPPING: <bound method Series.to_string of fileName             submission.csv
+date            2023-05-29 17:41:30
+description                     NaN
+status                     complete
+publicScore                 0.03703
+privateScore                0.06594
+Name: 3, dtype: object> into the database.
