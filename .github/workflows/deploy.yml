@@ -13,9 +13,10 @@ jobs:
         run: |
           echo "${{ secrets.AWS_PRIVATE_KEY }}" > key.pem
           chmod 600 key.pem
-      - name: Pull Docker image
+      - name: Rerun docker-compose
         run: |
           ssh -o StrictHostKeyChecking=no -i key.pem ubuntu@${{ secrets.EC2_IP }} 'sudo docker stop $(sudo docker ps -aq) || true'
           ssh -o StrictHostKeyChecking=no -i key.pem ubuntu@${{ secrets.EC2_IP }} 'sudo docker rm $(sudo docker ps -aq) || true'
           ssh -o StrictHostKeyChecking=no -i key.pem ubuntu@${{ secrets.EC2_IP }} 'sudo docker image prune -f'
-          ssh -o StrictHostKeyChecking=no -i key.pem ubuntu@${{ secrets.EC2_IP }} 'sudo docker-compose up -d -f /home/ubuntu/backend_for_int20h_leaderboard/docker-compose.yml'
+          ssh -o StrictHostKeyChecking=no -i key.pem ubuntu@${{ secrets.EC2_IP }} 'cd /home/ubuntu/backend_for_int20h_leaderboard && git pull main'
+          ssh -o StrictHostKeyChecking=no -i key.pem ubuntu@${{ secrets.EC2_IP }} 'sudo docker-compose -f /home/ubuntu/backend_for_int20h_leaderboard/docker-compose.yaml up -d'
