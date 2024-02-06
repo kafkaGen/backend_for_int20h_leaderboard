@@ -2,7 +2,7 @@ import os
 import subprocess
 
 import pandas as pd
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, HTTPException
 from fastapi.responses import JSONResponse
 
 from ..dependencies import get_connection, setup_logging
@@ -26,11 +26,10 @@ async def register(teamname: str, username: str, apikey: str) -> JSONResponse:
         os.environ["KAGGLE_USERNAME"] = username
         os.environ["KAGGLE_KEY"] = apikey
         command = "kaggle competitions list"
-        result = subprocess.run(command, shell=True, capture_output=True, text=True).stdout
-        if result == "":
+        return_code = os.system(command)
+        if return_code != 0:
             logger.error(f"Invalid Kaggle credentials: {username}, {apikey}")
-            response = JSONResponse(content={"message": "Invalid Kaggle credentials!"}, status_code=400)
-            return response
+            raise HTTPException(status_code=400, detail="Invalid Kaggle credentials!")
 
         logger.info(f"LOGING INSERTING: {teamname}, {username}, {apikey} into the database.")
         cursor = conn.cursor()

@@ -22,16 +22,11 @@ async def accuracy_scores() -> JSONResponse:
     sql_query = "SELECT * from accuracy_scores;"
     df = pd.read_sql_query(sql_query, conn).drop(["id"], axis=1)
     df.sort_values(by="score", inplace=True, ascending=False)
-    print(df)
-    json_data = df.to_json(orient="records", lines=True)
+    df["last"] = df["last"].astype(str)
+    json_data = df.to_dict(orient="records")
     conn.close()
 
-    headers = {
-        "Content-Disposition": "attachment; filename=data.csv",
-        "Content-Type": "text/csv",
-    }
-
-    return JSONResponse(content=json_data, status_code=200, headers=headers)
+    return JSONResponse(content=json_data, status_code=200)
 
 
 @router.get("/refresh_accuracy_scores/")
