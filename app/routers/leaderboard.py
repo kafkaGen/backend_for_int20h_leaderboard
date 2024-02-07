@@ -29,7 +29,7 @@ async def accuracy_scores() -> JSONResponse:
     return JSONResponse(content=json_data, status_code=200)
 
 
-@router.get("/refresh_accuracy_scores/")
+@router.post("/refresh_accuracy_scores/")
 async def refresh_accuracy_scores() -> None:
     conn = get_connection()
     logger = setup_logging()

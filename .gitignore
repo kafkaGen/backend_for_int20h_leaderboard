@@ -5,3 +5,4 @@ test/
 logfile.txt
 cert.pem
 key.pem
+.idea/
