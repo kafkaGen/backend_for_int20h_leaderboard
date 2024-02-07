@@ -3,3 +3,5 @@
 .env
 test/
 logfile.txt
+cert.pem
+key.pem
