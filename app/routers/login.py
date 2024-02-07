@@ -1,5 +1,4 @@
 import os
-import subprocess
 
 import pandas as pd
 from fastapi import APIRouter, Depends, HTTPException
@@ -29,8 +28,8 @@ async def register(request: Request) -> JSONResponse:
     logger = setup_logging()
     sql_query = "SELECT * FROM users;"
     df = pd.read_sql_query(sql_query, conn)
-    isRegistered = apikey in df["apikey"].to_list()
-    if not isRegistered:
+    is_registered = apikey in df["apikey"].to_list()
+    if not is_registered:
         os.environ["KAGGLE_USERNAME"] = username
         os.environ["KAGGLE_KEY"] = apikey
         command = "kaggle competitions list"

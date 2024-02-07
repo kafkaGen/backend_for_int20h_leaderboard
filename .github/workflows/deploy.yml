@@ -19,5 +19,4 @@ jobs:
           ssh -o StrictHostKeyChecking=no -i key.pem ubuntu@${{ secrets.EC2_IP }} 'sudo docker rm $(sudo docker ps -aq) || true'
           ssh -o StrictHostKeyChecking=no -i key.pem ubuntu@${{ secrets.EC2_IP }} 'sudo docker image prune -f'
           ssh -o StrictHostKeyChecking=no -i key.pem ubuntu@${{ secrets.EC2_IP }} 'cd /home/ubuntu/backend_for_int20h_leaderboard && git pull origin'
-          ssh -o StrictHostKeyChecking=no -i key.pem ubuntu@${{ secrets.EC2_IP }} 'cd /home/ubuntu/backend_for_int20h_leaderboard && openssl req -x509 -newkey rsa:4096 -nodes -out cert.pem -keyout key.pem -days 365 -subj "/C=UA/ST=Kyiv/L=Kyiv/O=Best/OU=Best Kyiv/CN=best-kyiv.org"'
           ssh -o StrictHostKeyChecking=no -i key.pem ubuntu@${{ secrets.EC2_IP }} 'sudo docker-compose -f /home/ubuntu/backend_for_int20h_leaderboard/docker-compose.yaml up -d'

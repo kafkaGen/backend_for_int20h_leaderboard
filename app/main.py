@@ -1,14 +1,9 @@
-import ssl
-
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+
 from app.routers import leaderboard, login
 
-
 app = FastAPI()
-
-ssl_context = ssl.SSLContext(ssl.PROTOCOL_TLS_SERVER)
-ssl_context.load_cert_chain("cert.pem", keyfile="key.pem")
 
 app.add_middleware(
     CORSMiddleware,
