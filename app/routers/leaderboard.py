@@ -22,14 +22,14 @@ async def accuracy_scores() -> JSONResponse:
     sql_query = "SELECT * from accuracy_scores;"
     df = pd.read_sql_query(sql_query, conn).drop(["id"], axis=1)
     df.sort_values(by="score", inplace=True, ascending=False)
-    df['last'] = df['last'].astype(str)
+    df["last"] = df["last"].astype(str)
     json_data = df.to_dict(orient="records")
     conn.close()
 
     return JSONResponse(content=json_data, status_code=200)
 
 
-@router.get("/refresh_accuracy_scores/")
+@router.post("/refresh_accuracy_scores/")
 async def refresh_accuracy_scores() -> None:
     conn = get_connection()
     logger = setup_logging()
