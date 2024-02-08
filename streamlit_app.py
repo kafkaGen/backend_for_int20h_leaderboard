@@ -4,7 +4,7 @@ import pandas as pd
 import requests
 from dotenv import load_dotenv
 
-import streamlit_app as st
+import streamlit as st
 
 load_dotenv()
 
