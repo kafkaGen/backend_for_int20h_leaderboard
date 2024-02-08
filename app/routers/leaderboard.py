@@ -62,7 +62,7 @@ async def refresh_accuracy_scores() -> None:
                     """
                     values = (
                         row["teamname"],
-                        users_submitions.iloc[0]["privateScore"],
+                        users_submitions.iloc[0]["privateScore"] if users_submitions.iloc[0]["privateScore"] else 0,
                         users_submitions.shape[0],
                         users_submitions.iloc[0]["date"],
                     )
@@ -80,7 +80,7 @@ async def refresh_accuracy_scores() -> None:
                     WHERE teamname = %s;
                     """
                     new_values = (
-                        users_submitions.iloc[0]["privateScore"],
+                        users_submitions.iloc[0]["privateScore"] if users_submitions.iloc[0]["privateScore"] else 0,
                         users_submitions.shape[0],
                         users_submitions.iloc[0]["date"],
                         row["teamname"],
