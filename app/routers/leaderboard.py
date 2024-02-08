@@ -45,6 +45,7 @@ async def refresh_accuracy_scores() -> None:
             command = "kaggle competitions submissions -c rsna-pneumonia-detection-challenge"
             result = subprocess.run(command, shell=True, capture_output=True, text=True).stdout
             cleaned_string = "\n".join(line.strip() for line in result.strip().split("\n"))
+            cleaned_string = "\n".join(cleaned_string.split("\n")[1:])
             data = StringIO(cleaned_string)
             users_submitions = pd.read_fwf(data).drop(0, axis=0)
             users_submitions["privateScore"] = users_submitions["privateScore"].astype(float)
@@ -95,3 +96,4 @@ async def refresh_accuracy_scores() -> None:
             logger.error(f"Error: {e} while fetching data for {row['teamname']}")
 
     conn.close()
+    return JSONResponse(content={"message": "Successfully!"}, status_code=200)
