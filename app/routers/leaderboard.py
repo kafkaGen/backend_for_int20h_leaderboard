@@ -51,6 +51,8 @@ async def refresh_accuracy_scores() -> None:
             users_submitions = pd.read_fwf(data).drop(0, axis=0)
             users_submitions["privateScore"] = users_submitions["privateScore"].astype(float)
             users_submitions.sort_values(by="privateScore", inplace=True, ascending=False)
+            users_submitions.fillna(0, inplace=True)
+            accuracy_scores.fillna(0, inplace=True)
 
             if users_submitions.shape[0]:
 

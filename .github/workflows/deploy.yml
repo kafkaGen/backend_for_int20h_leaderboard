@@ -21,4 +21,4 @@ jobs:
           ssh -o StrictHostKeyChecking=no -i key.pem ubuntu@${{ secrets.EC2_IP }} 'sudo docker image prune -f'
           ssh -o StrictHostKeyChecking=no -i key.pem ubuntu@${{ secrets.EC2_IP }} 'cd /home/ubuntu/backend_for_int20h_leaderboard && git pull origin'
           ssh -o StrictHostKeyChecking=no -i key.pem ubuntu@${{ secrets.EC2_IP }} 'sudo docker-compose -f /home/ubuntu/backend_for_int20h_leaderboard/docker-compose.yaml up -d'
-          ssh -o StrictHostKeyChecking=no -i key.pem ubuntu@${{ secrets.EC2_IP }} 'cd /home/ubuntu/backend_for_int20h_leaderboard && streamlit run streamlit_app.py &'
+          ssh -o StrictHostKeyChecking=no -i key.pem ubuntu@${{ secrets.EC2_IP }} 'cd /home/ubuntu/backend_for_int20h_leaderboard && python3 -m streamlit run streamlit_app.py &'
