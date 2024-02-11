@@ -36,7 +36,7 @@ def get_leaderboard():
     url = f"{os.getenv('APP_HOST')}/leaderboard/accuracy_scores/"
     response = requests.get(url).json()
     df = pd.DataFrame(response)
-    df.sort_values(by="score", inplace=True, ascending=False)
+    # df.sort_values(by="score", inplace=True, ascending=False)
     return df
 
 

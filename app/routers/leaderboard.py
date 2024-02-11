@@ -21,6 +21,7 @@ async def accuracy_scores() -> JSONResponse:
     conn = get_connection()
     sql_query = "SELECT * from accuracy_scores;"
     df = pd.read_sql_query(sql_query, conn).drop(["id"], axis=1).fillna(0)
+    df["score"] = df["score"].astype(float)
     df.sort_values(by="score", inplace=True, ascending=False)
     df["last"] = df["last"].astype(str)
     df["score"] = df["score"].astype(str)
